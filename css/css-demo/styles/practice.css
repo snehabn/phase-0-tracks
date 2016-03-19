@@ -4,11 +4,28 @@
 
 .job {
 	background-color: #E9E5DC;
-	border-radius: 5px;
+	border-radius: 15px;
+	border: solid 1px black;
 	padding: 15px; 
 	margin-top: 40px;
 }
 
 .unordered-list {
 	font-size: 0.8em;
+}
+/*cascading style sheets is literally demonstrated above.  the first sheet is read by the index.html file and all changes are applied.  the changes to any redunant elements in subsequent sheets are then applied, to overwrite previous styling.*/
+/*pseudo selectors or pseudo class selectors takes a specific state of an element that needs modification and does not affect the data in the tree*/
+
+#resume-title:hover {
+	background-color:gold;
+}
+
+li:first-child {
+	background-color:gold;
+}
+li:nth-child(2) {
+	background-color:yellow;
+}
+li:nth-child(3) {
+	background-color:red;
 }
