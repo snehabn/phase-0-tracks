@@ -1,10 +1,28 @@
+Skip to content
+This repository  
+Search
+Pull requests
+Issues
+Gist
+ @snehabn
+ Watch 1
+  Star 0
+  Fork 80 justincadburywong/phase-0-tracks
+forked from Devbootcamp/phase-0-tracks
+ Code  Pull requests 0  Pulse  Graphs
+Branch: master Find file Copy pathphase-0-tracks/css/css-demo/styles/practice.css
+0237c26  6 minutes ago
+@justincadburywong justincadburywong changes made, all releases done
+1 contributor
+RawBlameHistory     31 lines (27 sloc)  774 Bytes
 #contact-info {
 	font-size: 0.8em;
 }
 
 .job {
 	background-color: #E9E5DC;
-	border-radius: 5px;
+	border-radius: 15px;
+	border: solid 1px black;
 	padding: 15px; 
 	margin-top: 40px;
 }
@@ -12,3 +30,21 @@
 .unordered-list {
 	font-size: 0.8em;
 }
+/*cascading style sheets is literally demonstrated above.  the first sheet is read by the index.html file and all changes are applied.  the changes to any redunant elements in subsequent sheets are then applied, to overwrite previous styling.*/
+/*pseudo selectors or pseudo class selectors takes a specific state of an element that needs modification and does not affect the data in the tree*/
+
+#resume-title:hover {
+	background-color:gold;
+}
+
+li:first-child {
+	background-color:gold;
+}
+li:nth-child(2) {
+	background-color:yellow;
+}
+li:nth-child(3) {
+	background-color:red;
+}
+Status API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Contact Help
