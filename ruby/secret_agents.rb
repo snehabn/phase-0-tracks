@@ -76,3 +76,6 @@ until valid_input
     agent_input = gets.chomp
   end
 end
+
+# decrypt(encrypt("password")) works because your are taking the string output from the encrypt method and inserting it into the decrypt method.
+# the decrypt method and the encrypt methods only accept a string as input.
