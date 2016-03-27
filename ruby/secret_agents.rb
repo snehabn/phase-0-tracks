@@ -84,8 +84,8 @@ end
 
 ######################################################################################################################################
 #My partner and I also initally tried to attempt this using a while method with index. We were having some trouble matching the index of the
-#variable to the alphabetstring so we attended Ryan Milstead's office hours, where he suggested it may be more efficient to use the ordinance
-#number and to determine the ASCII number of each character and then subtract or add one and return the resulting value.
+#variable to the alphabetstring so we attended Ryan Milstead's office hours, where he suggested it may be more efficient to use the ASCII ordinance
+#numbers to determine "index" of each character and then subtract or add one and return the resulting value.
 #That is what we did for the above section and it worked really well.... Below is what we had been trying to troubleshoot.
 
 # Define an encrypt method to advances every letter of a string one letter forward
