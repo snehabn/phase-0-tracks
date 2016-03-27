@@ -1,0 +1,82 @@
+Organizing clothes in a closet
+
+- Remove all items from closet.
+
+- Sort items into category piles
+	- Clothes
+	- Purses
+	- Scarves
+	- Miscellaneous
+
+- Sort clothes
+	- If clothing is faded, torn, or doesn't fit,
+		- Place in a separate pile for discarding
+	- Elsif clothing is a top, fold neatly and create a separate stack.
+	- Elsif clothing is a bottom, fold neatly and create a separate stack.
+	- Else fold clothing neatly and create a separate stack for miscellaneous clothes.
+
+- Stack shelves
+	- Until the stack is has four pieces of clothing,
+		- Stack clothes by category
+	- Move to next stack.
+
+- Hang purses on hooks
+
+- Store Scarves
+	- Obtain a hanger
+	
+	- Until there are six scarves,
+		- For each scarf,
+			- fold scarf over hanger and tie a loose knot to keep it in place.
+	- Obtain another hanger and repeat.
+	- Hang hangers under shelf.
+
+- Stand back and admire your newly organized closet!
+
+
+
+Robot Elevator Algorithm Pseudocode
+
+- Until wall is detected, move forward.
+	
+	- Until change in wall depth is detected, move forward.
+		- When change in wall depth is detected,
+			- Stop and turn towards wall and scan for a button around the perimeter of wall.
+			- If a button is detected,
+				- Push button and go to elevator method/mode.
+			- Else continue along the wall until another change in wall depth is detected.
+			
+	
+	- Define elevator mode/method
+
+		- Wait until doors are open
+		- Move forward until wall is detected - Wall A
+			- Count steps to Wall A -- Wall A Steps
+
+		- Turn left and move along until a wall is detected - Wall B
+			- Count steps to Wall B -- Wall B Steps
+
+		- Turn left and move forward until wall is detected - Wall C
+			- Count steps to Wall C -- Wall C Steps
+
+			- Move slowly and scan for buttons panel.
+				- Count steps to panel. -- Panel Steps
+
+			- Once buttons panel is identified, ask Robot-owner for floor input.
+				- Identify number from input
+				- Scan for number on buttons panel.
+				- If number is identified
+					- Push button
+				- Else state "That floor cannot be reached. Please select another floor."
+				- Loop through the previous steps.
+
+		- When doors close move back from Wall C.
+		- When doors open, wait until humans exit.
+
+		- Move back up to Wall C Panel.
+		- Push Open Door button.
+
+		- Retrace steps using counts from Panel Steps, Wall C Steps, Wall B Steps, and Wall A Steps
+		- Exit Elevator.
+
+
