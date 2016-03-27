@@ -60,6 +60,8 @@ valid_input = false
 until valid_input
 
 # Process user entry and run chosen method. Print result in a sentence. Update 'valid_input' to end loop.
+# If the user input is to encrypt, use the encrypt method to run the password, else if the user wants to decrypt, use the decrypt method. 
+# Otherwise ask the user to re-state their request.
   if agent_input.downcase == "encrypt"
       puts "Please enter passcode(s)."
       encrypt_passcode = gets.chomp
