@@ -81,3 +81,40 @@ end
 
 # decrypt(encrypt("password")) works because your are taking the string output from the encrypt method and inserting it into the decrypt method.
 # the decrypt method and the encrypt methods only accept a string as input.
+
+######################################################################################################################################
+#My partner and I also initally tried to attempt this using a while method with index. We were having some trouble matching the index of the
+#variable to the alphabetstring so we attended Ryan Milstead's office hours, where he suggested it may be more efficient to use the ASCII ordinance
+#numbers to determine "index" of each character and then subtract or add one and return the resulting value.
+#That is what we did for the above section and it worked really well.... Below is what we had been trying to troubleshoot.
+
+# Define an encrypt method to advances every letter of a string one letter forward
+def encrypt(password)
+# initialize index (=0)
+index = 0
+
+# variable = string (and set up a variable = length of string.)
+# puts "Please enter your password."
+# password = gets.chomp.downcase
+
+# write a while loop
+
+# while the index is less than the variable length the loop will repeat
+while index < password.length
+  password[index] = password[index].next
+  # add strings together
+  index+=1
+  # pass_array_2 = password.split("")
+  # for i in pass_array = "z"
+  #   print "a"
+  # end
+end
+puts password
+end
+
+# output 
+
+# alphabetstring = "abcdefghijklmnopqrstuvwxyz".split("")
+# p arr = alphabetstring.index("w").to_i
+# p arr_1 = arr - 1
+# p alphabetstring[arr_1]
