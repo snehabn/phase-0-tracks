@@ -58,7 +58,7 @@ until i > num_employees
 	end
 	
 	real_age = (Time.now.year.to_i)-(birth_year)
-		
+	puts	
 	if name.downcase == "drake cula" || name == "tu fang"
 		puts "#{name} is definitely a vampire."
 	elsif ((age != real_age) && (!garlic || !health_ins)) || is_allergic_to_sunshine
@@ -72,6 +72,6 @@ until i > num_employees
 	end
 
 	i+=1
-
+	
 end
 puts "Actually, never mind! What do these questions have to do with anything? Let's all be friends."
