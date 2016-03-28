@@ -1,14 +1,14 @@
 
 puts "How many employees would you like to process?"
 num_employees = gets.chomp.to_i
-
-until num_employees == 0
+i = 1
+until i > num_employees
 	puts 
 	puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-	puts "Questionnaire for employee #{num_employees.reverse}"
+	puts "Questionnaire for employee #{i}"
 	puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	puts "What is the employee's name?"
-	name = gets.chomp
+	name = gets.chomp.capitalize
 	
 	puts "How old is #{name}?"
 	age = gets.chomp.to_i
@@ -39,7 +39,7 @@ until num_employees == 0
 		health_ins = false
 	end
 	
-	puts "What allergies does #{name} have?"
+	puts "What allergies does #{name} have? Please type 'done' when finished."
 	allergies = gets.chomp.downcase
 	is_allergic_to_sunshine = case allergies
 	when "sunshine"
@@ -59,19 +59,19 @@ until num_employees == 0
 	
 	real_age = (Time.now.year.to_i)-(birth_year)
 		
-	if name == "Drake Cula" || name == "Tu Fang"
-		puts "Definitely a vampire."
+	if name.downcase == "drake cula" || name == "tu fang"
+		puts "#{name} is definitely a vampire."
 	elsif ((age != real_age) && (!garlic || !health_ins)) || is_allergic_to_sunshine
-		puts "Probably a vampire."
+		puts "#{name} is probably a vampire."
 	elsif (age == real_age) && (garlic || health_ins)
-		puts "Probably not a vampire."
+		puts "#{name} is probably not a vampire."
 	elsif (age != real_age) && !garlic && !health_ins
-		puts "Almost certainly a vampire."
+		puts "#{name} is almost certainly a vampire."
 	else
 		puts "Results inconclusive."
 	end
 
-	num_employees-=1
+	i+=1
 
 end
 puts "Actually, never mind! What do these questions have to do with anything? Let's all be friends."
