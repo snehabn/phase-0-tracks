@@ -66,5 +66,3 @@ else
 	
 	p applicant
 end
-
-
