@@ -69,12 +69,12 @@ santas = []
 example_genders = ["straight", "gay", "gender fluid", "male", "female", "agender"]
 example_ethnicity = ["American", "Canadian", "Mexican", "British", "Spanish", "French", "Indian"]
 example_suit_color = ["red","orange", "yellow", "green", "blue", "violet"]
-age = [rand(1..140)]
+age = 40
 example_ethnicity.length.times do |i|
   santas << Santa.new(example_genders[i], example_ethnicity[i], example_suit_color[i])
 end
 
-# p santas
+p santas
 
 # #Release 4
 
@@ -82,9 +82,7 @@ puts "Enter number of random Santas to generate:"
 num_santas = gets.chomp.to_i
 num_santas.times do
   s_claus = Santa.new(example_genders.sample, example_ethnicity.sample, example_suit_color.sample)
-  s_claus.speak
-  s_claus.eat_milk_and_cookies("cookie")
-  s_claus.age = rand(1..140)
+  s_claus.age = rand(0..140)
   p s_claus
 end
 
