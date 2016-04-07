@@ -84,5 +84,7 @@ num_santas.times do
   s_claus = Santa.new(example_genders.sample, example_ethnicity.sample, example_suit_color.sample)
   s_claus.age = rand(0..140)
   p s_claus
+  p s_claus.age
+  p s_claus.ethnicity
 end
 
