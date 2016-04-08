@@ -87,14 +87,18 @@ new_camera = Camera.new(camera_model, body_model, lens_brand)
 
 puts "Thank you for the information!"
 puts "Here is a menu of available actions:"
-puts " "
-puts "What would you like to do?"
-action = gets.chomp.downcase
+puts "1 - View photo album"
+puts "2 - Take a picture"
+puts "3 - Add photo to album"
+puts "4 - Make a movie"
+puts "5 - Find a photo from your album"
+puts "What would you like to do? Please enter a number corresponding to your choice."
+action = gets.chomp.to_i
+p action
+# case action
 
-case action
-
-when action.include? "take"
-	puts "Please enter name of picture to add to your album."
+# when action.include? "take"
+# 	puts "Please enter name of picture to add to your album."
 	
 
 	
