@@ -80,5 +80,7 @@ add_item("celery", 1)
 remove_item("carrots")
 
 update_item("celery", 3)
+
 update_item("grapes", 4)
+
 print_grocery_list
