@@ -25,7 +25,7 @@
 class Camera
 	
 	attr_reader :camera_model, :body_model, :lens_brand
-	attr_accessor :cost, :file_format, :picture
+	attr_accessor :cost, :file_format
 	
 	def initialize(camera_model, body_model, lens_brand)
 		@camera_model = camera_model
@@ -33,7 +33,6 @@ class Camera
 		@lens_brand = lens_brand
 		@cost = 0
 		@file_format = "RAW"
-		@picture
 		puts "Initializing new camera instance..."
 	end
 	
@@ -71,90 +70,81 @@ p nikon.find_photo("volcano")
 p nikon
 
 #Release 2
+# Method to call on class Camera and store instances
+# INPUT: prompt user for instance variables
+# STEPS:
+### transform inputs to appropriate types.
+### initialize new Camera method with inputs.
+### save new instances into data structure.
+### loop through until user prompts that they are done.
+# OUTPUTS:
+### Print out the attributes of each instance in readable format.
 
 puts "Hello and welcome to your camera portal. What is your name?"
 name = gets.chomp.capitalize
 
-puts "How many cameras would you like to enter?"
-num_of_cameras = gets.chomp.to_i
+new_camera = []
+entries = true
 
-num_of_cameras.times do
+count = 0 
+
+while entries
+
+	puts "Hi #{name}, please enter camera brand:"
+	camera_model = gets.chomp.capitalize
 	
-puts "Please enter camera brand:"
-camera_model = gets.chomp
-
-puts "Now, what model of the #{camera_model} do you have?"
-body_model = gets.chomp
-
-puts "What brand lens are you using?"
-lens_brand = gets.chomp
-
-puts "Finally, how much did your camera cost?"
-camera_cost = gets.chomp.to_i
-
-
-new_camera = Camera.new(camera_model, body_model, lens_brand)
-
-puts "Thank you for the information!"
-puts "Here is a menu of available actions:"
-puts "1 - View photo album"
-puts "2 - Take a picture"
-puts "3 - Add photo to album"
-puts "4 - Make a movie"
-puts "5 - Find a photo from your album"
-
-choice = false
-
-until choice
-
-	puts "What would you like to do? Please enter a number corresponding to your choice."
-	action = gets.chomp.to_i
 	
-	case action
+	puts "Now, what body model of the #{camera_model} do you have?"
+	body_model = gets.chomp.upcase
 	
-	when 1
-		puts "Here are the photos currently in your album:"
-		new_camera.photo_album.each do |photo|
-			puts "#{photo}"
-		end
-		choice = true
-	when 2
-		puts "How many photos would you like to take?"
-		photos_to_take = gets.chomp.to_i
-		puts "Get ready to take #{photos_to_take} photos!"
-		photos_to_take.times do |i|
-			puts "Say cheese!"
-			puts "Click!"
-		end
-		choice = true
-	when 3
-		puts "Please list the names of the photos you wish to add to your album:"
-		photo_to_album = gets.chomp
-		p new_camera.photo_album
-		new_camera.add_to_album(photo_to_album)
-		p new_camera.photo_album
-		# puts "Here is your updated album library:"
+	
+	puts "What brand lens are you using?"
+	lens_brand = gets.chomp.capitalize
+	
+	
+	puts "How much did your camera cost? Leave blank if you can't remember."
+	camera_cost = gets.chomp.to_f
+	
+	puts "Finally, what file format are your pictures in?"
+	photo_format = gets.chomp
+	
+
+	camera = Camera.new(camera_model,body_model, lens_brand)
+	camera.cost = camera_cost
+	
+	if photo_format != ""
+		camera.file_format = photo_format
+	end
+	
+	new_camera << camera
+	
+	
+	camera_entry = ""
+	until camera_entry == "yes" || camera_entry =="no"
+	
+		puts "Your camera has been entered, #{name}! Would you like to enter another camera? yes/no"
+		camera_entry = gets.chomp.downcase
 		
-		# new_camera.photo_album.each do |photo|
-		# 	puts "#{photo}"
-		# end
-		choice = true
-	when 4
-		puts "How many hours do you want your movie to be?"
-		movie_duration = gets.chomp.to_f
-		movie_minutes = movie_duration * 60
-		p "Your movie will be #{movie_minutes} minutes long."
-		choice = true
-	when 5
-		puts "Please enter the name of the photo to find:"
-		locate_photo = gets.chomp.downcase
-		new_camera.find_photo(locate_photo)
-		choice = true
-	else
-		puts "You have entered invalid number. Please choose from choices 1 thru 5."
-		choice = false
-end
-end
+		if camera_entry == "no"
+			entries = false
+		else
+			entries
+		end
+	end
+
 end
 
-puts "Thank you for visiting this camera portal!"
+new_camera.each do |information|
+	count += 1
+	puts "For camera #{count}, you have inserted the following information: 
+	Your camera model is #{information.camera_model}.
+	Your camera's body model is #{information.body_model}.
+	Your lens is a #{information.lens_brand}.
+	It cost you $#{information.cost}.
+	The picture is saved in #{information.file_format} format."
+	puts
+	puts
+end
+
+puts "Thanks for visiting this camera portal! Please visit again!"
+
