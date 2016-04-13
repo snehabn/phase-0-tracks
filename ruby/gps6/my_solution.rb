@@ -20,56 +20,59 @@ class VirusPredictor
 
   # calling on predicted_deaths and speed_of_spread and returning the outputs.
   def virus_effects
-    predicted_deaths
-    speed_of_spread
+    predicted_deaths_speed
+    # speed_of_spread
   end
 
   private
 
   # method calculates number of deaths based on population density and returns a statement for each state.
-  def predicted_deaths
+  def predicted_deaths_speed
     # predicted deaths is solely based on population density
-    density = @population_density
-    pop = @population
-
-    if density >= 200
-      number_of_deaths = (pop * 0.4).floor
-    elsif density >= 150
-      number_of_deaths = (pop * 0.3).floor
-    elsif density >= 100
-      number_of_deaths = (pop * 0.2).floor
-    elsif density >= 50
-      number_of_deaths = (pop * 0.1).floor
-    else
-      number_of_deaths = (pop * 0.05).floor
-    end
-
-    print "#{@state} will lose #{number_of_deaths} people in this outbreak"
-
-  end
-
-  # method calculates speed of spread based on the population density and returns a statement stating speed.
-  def speed_of_spread #in months
-    # We are still perfecting our formula here. The speed is also affected
-    # by additional factors we haven't added into this functionality.
+    
     speed = 0.0
-    density = @population_density
-
-    if density >= 200
+    
+    if @population_density >= 200
+      number_of_deaths = (@population * 0.4).floor
       speed += 0.5
-    elsif density >= 150
+    elsif @population_density >= 150
+      number_of_deaths = (@population * 0.3).floor
       speed += 1
-    elsif density >= 100
+    elsif @population_density >= 100
+      number_of_deaths = (@population * 0.2).floor
       speed += 1.5
-    elsif density >= 50
+    elsif @population_density >= 50
+      number_of_deaths = (@population * 0.1).floor
       speed += 2
     else
+      number_of_deaths = (@population * 0.05).floor
       speed += 2.5
     end
-
-    puts " and will spread across the state in #{speed} months.\n\n"
-
+  puts " and will spread across the state in #{speed} months.\n\n"
+    print "#{@state} will lose #{number_of_deaths} people in this outbreak"
+  
   end
+  # method calculates speed of spread based on the population density and returns a statement stating speed.
+  # def speed_of_spread #in months #### ----> REFACTORED INTO METHOD ABOVE.
+  #   # We are still perfecting our formula here. The speed is also affected
+  #   # by additional factors we haven't added into this functionality.
+  #   speed = 0.0
+
+  #   if @population_density >= 200
+  #     speed += 0.5
+  #   elsif @population_density >= 150
+  #     speed += 1
+  #   elsif @population_density >= 100
+  #     speed += 1.5
+  #   elsif @population_density >= 50
+  #     speed += 2
+  #   else
+  #     speed += 2.5
+  #   end
+
+  #   puts " and will spread across the state in #{speed} months.\n\n"
+
+  # end
 
 end
 
