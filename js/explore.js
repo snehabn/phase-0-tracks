@@ -25,21 +25,10 @@ function reverse(str_input) {
 	return joined_output
 }
 
-// var hello = reverse("Hello");
 
-
-	// if (hello == "Hello"){
-	// 	console.log("Valid entry.")
-	// }
-	// else if (hello == "olleH"){
-	// 	console.log("Reversed entry.")
-	// }
-	// else {
-	// 	console.log("Not a valid entry.")
-	// }
 function cond_output(input) {
 	if (reverse(input).length <= 5) {
-		console.log("Your word has a length less or equal to 5.")
+		console.log("Your word has a length less or equal to 5.");
 		console.log(reverse(input));
 	}
 	else {
@@ -47,5 +36,5 @@ function cond_output(input) {
 	}
 }
 
-cond_output("Papaya")
-cond_output("Hello")
+cond_output("Papaya");
+cond_output("Hello");
