@@ -29,7 +29,7 @@ function reverse(str_input) {
 function cond_output(input) {
 	if (reverse(input).length <= 5) {
 		console.log("Your word has a length less or equal to 5.");
-		console.log(reverse(input));
+		var new_var = console.log(reverse(input));
 	}
 	else {
 		console.log("Your word has a length greater than 5.");
