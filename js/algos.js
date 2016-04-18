@@ -34,4 +34,40 @@ function longestWord(arrayOfwords){
 	return maxWord;
 }
 
+
+
+
+// Release 1
+
+// Method: write a function that takes two objects and checks to see if the objects share at least one key-value pair.
+
+// Input: two objects to be compared
+
+// Steps: 
+/// Loop over the key and value pairs of one object and compare to the other
+//// IF the the value of a key of an object is equal to the value of a key of the second object, return true.
+///ELSE return false.
+
+// Output: true if there are matching pairs, false if there are not.
+
+
+function objectCompare(object1, object2) {
+	for (var key in object1) {
+		if (object1[key] == object2[key]) {
+			// console.log("True");
+			return true;
+		}
+	}
+	return false;// had to insert the return false outside of the for loop to allow the program to loop through all of the key-value pair comparisons.
+}
+
+//Driver codes
+
+//Release 0 
 console.log(longestWord(["apples", "oranges", "pineapples", "kiwi"]));
+
+
+//Release 1
+console.log(objectCompare({name: "Steven", age: 54}, {name: "Tamir", age: 54}));
+console.log(objectCompare({name: "Steven", age: 54}, {name: "Tamir", age: 86}));
+console.log(objectCompare({name: "Bob", age: 54, sport: "baseball"}, {name: "Joe", age: 87, sport: "baseball"}));
