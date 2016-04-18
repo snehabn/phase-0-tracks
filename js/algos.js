@@ -61,6 +61,34 @@ function objectCompare(object1, object2) {
 	return false;// had to insert the return false outside of the for loop to allow the program to loop through all of the key-value pair comparisons.
 }
 
+
+// Release 2
+
+// Method: function that takes an integer for length, and builds and returns an array of strings of the given length.
+
+// Input: integer 
+
+// Steps: 
+/// Initialize empty array to populate with input number of elements.
+/// Add in a string of letters that can be used to generate random word.
+/// Create a random number that is inclusive of range 1 to 10.
+/// FOR input number of times, generate a word of random length and push it to the initialized array.
+
+
+// Output: return array that is length of input integer with words that have 1 to 10 letters.
+
+function integerArray(x) {
+	var newArray = [];
+	var lettersString = "abcdefghij";
+	
+	for (var i = 0; i < x; i++){ 
+		randNumber = Math.floor(Math.random() * 10) + 1;// --> following this formula: Math.floor(Math.random() * (max - min + 1)) + min;
+		newArray.push(lettersString.substring(0, randNumber));
+	}
+	return newArray
+}
+
+
 //Driver codes
 
 //Release 0 
@@ -71,3 +99,11 @@ console.log(longestWord(["apples", "oranges", "pineapples", "kiwi"]));
 console.log(objectCompare({name: "Steven", age: 54}, {name: "Tamir", age: 54}));
 console.log(objectCompare({name: "Steven", age: 54}, {name: "Tamir", age: 86}));
 console.log(objectCompare({name: "Bob", age: 54, sport: "baseball"}, {name: "Joe", age: 87, sport: "baseball"}));
+
+//Release 2
+console.log(integerArray(3));
+
+for (var i = 1; i <= 10; i++) {
+	console.log(longestWord(integerArray(i)));
+}
+
