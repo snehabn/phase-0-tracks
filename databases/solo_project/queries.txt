@@ -1,0 +1,115 @@
+Release 2:
+
+1. Display the information in one table (either table is fine).
+
+sqlite> .table
+sqlite> SELECT * FROM residents;
+id     name                  years_in_residence  valid_income  building_id
+-----  --------------------  ------------------  ------------  -----------
+1      Lewis Clark           2                   true          1          
+2      Christopher Colombus  3                   true          2          
+3      Marco Polo            4                   false         1          
+4      Vasco De Gama         2                   false         2          
+5      Daniel Boone          3                   true          3          
+6      Leif Ericson          4                   false         3          
+7      Neil Armstrong        1                   true          1           
+
+
+2. Update an item that meets some condition (you can choose a condition that makes sense).
+
+sqlite> UPDATE residents SET building_id=2 WHERE name="Marco Polo";
+sqlite> UPDATE residents SET building_id=1 WHERE name="Christopher Colombus";
+sqlite> SELECT * FROM residents;
+id     name                  years_in_residence  valid_income  building_id
+-----  --------------------  ------------------  ------------  -----------
+1      Lewis Clark           2                   true          1          
+2      Christopher Colombus  3                   true          1          
+3      Marco Polo            4                   false         2          
+4      Vasco De Gama         2                   false         2          
+5      Daniel Boone          3                   true          3          
+6      Leif Ericson          4                   false         3          
+7      Neil Armstrong        1                   true          1          
+
+
+3. Display the information in both tables using one query.
+sqlite> SELECT * FROM residents, buildings WHERE residents.building_id = buildings.id;
+id     name                  years_in_residence  valid_income  building_id  id          name          
+-----  --------------------  ------------------  ------------  -----------  ----------  --------------
+1      Lewis Clark           2                   true          1            1           American Villa
+2      Christopher Colombus  3                   true          1            1           American Villa
+3      Marco Polo            4                   false         2            2           European Villa
+4      Vasco De Gama         2                   false         2            2           European Villa
+5      Daniel Boone          3                   true          3            3           Nordic Villa  
+6      Leif Ericson          4                   false         3            3           Nordic Villa  
+7      Neil Armstrong        1                   true          1            1           American Villa
+
+
+4. Display a narrower selection of columns (fewer columns than all of them, in other words) from both tables using one query.
+sqlite> SELECT residents.name, residents.years_in_residence, buildings.name FROM residents JOIN buildings ON residents.building_id = buildings.id;
+name                  years_in_residence    name          
+--------------------  --------------------  --------------
+Lewis Clark           2                     American Villa
+Christopher Colombus  3                     American Villa
+Marco Polo            4                     European Villa
+Vasco De Gama         2                     European Villa
+Daniel Boone          3                     Nordic Villa  
+Leif Ericson          4                     Nordic Villa  
+Neil Armstrong        1                     American Villa
+
+
+5. Delete an item that meets some condition (you can choose a condition that makes sense).
+
+sqlite> DELETE FROM residents WHERE name="Neil Armstrong";
+sqlite> SELECT residents.name, residents.years_in_residence, buildings.name FROM residents JOIN buildings ON residents.building_id = buildings.id;
+name                  years_in_residence    name                
+--------------------  --------------------  --------------------
+Lewis Clark           2                     American Villa      
+Christopher Colombus  3                     American Villa      
+Marco Polo            4                     European Villa      
+Vasco De Gama         2                     European Villa      
+Daniel Boone          3                     Nordic Villa        
+Leif Ericson          4                     Nordic Villa        
+
+Release 3
+1. Types of joins:
+	INNER JOIN
+	LEFT JOIN
+	RIGHT JOIN
+	OUTER JOIN
+	LEFT JOIN EXCLUDING INNER JOIN
+	RIGHT JOIN EXCLUDING INNER JOIN
+	OUTER JOIN EXCLUDING INNER JOIN
+	source: http://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins
+
+
+2. Try a few different joins in your database, and record the commands and the output.
+
+LEFT JOIN:
+
+sqlite> SELECT residents.id, residents.name, residents.building_id FROM residents LEFT JOIN buildings ON residents.building_id=buildings.id;
+id                    name                  building_id         
+--------------------  --------------------  --------------------
+1                     Lewis Clark           1                   
+2                     Christopher Colombus  1                   
+3                     Marco Polo            2                   
+4                     Vasco De Gama         2                   
+5                     Daniel Boone          3                   
+6                     Leif Ericson          3                   
+
+INNER JOIN:
+
+sqlite> SELECT residents.id, residents.name, buildings.name FROM residents INNER JOIN buildings ON residents.building_id=buildings.id;
+id                    name                  name                
+--------------------  --------------------  --------------------
+1                     Lewis Clark           American Villa      
+2                     Christopher Colombus  American Villa      
+3                     Marco Polo            European Villa      
+4                     Vasco De Gama         European Villa      
+5                     Daniel Boone          Nordic Villa        
+6                     Leif Ericson          Nordic Villa  
+
+
+
+
+
+
