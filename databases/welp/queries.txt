@@ -1,0 +1,302 @@
+welp [master] :> git add welp.db
+welp [master] :> git commit -m "Dropped file in"
+[master 277bf06] Dropped file in
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+welp [master] :> touch queries.txt
+welp [master] :> open queries.txt 
+welp [master] :> SELECT users.first_name, users.last_name, businesses.name, reviews.comment, reviews.stars, businesses.id FROM users, businesses, reviews WHERE reviews.businesses_id=businesses.id;
+-bash: SELECT: command not found
+welp [master] :> .tables
+-bash: .tables: command not found
+welp [master] :> sqlite3 welp.db 
+SQLite version 3.8.10.2 2015-05-20 18:17:19
+Enter ".help" for usage hints.
+sqlite> .tables
+businesses  reviews     users     
+sqlite> SELECT users.first_name, users.last_name, businesses.name, reviews.comment, reviews.stars, businesses.id FROM users, businesses, reviews WHERE reviews.businesses_id=businesses.id;
+Bradford|Pitt|Sushi World|Great food.|4|6
+Mandy|Kaling|Sushi World|Great food.|4|6
+Angela|Jolie|Sushi World|Great food.|4|6
+Steven|Wonder|Sushi World|Great food.|4|6
+Holly|Berry|Sushi World|Great food.|4|6
+Merryl|Streepman|Sushi World|Great food.|4|6
+Denzel|George|Sushi World|Great food.|4|6
+Bradford|Pitt|Lotus Yoga|Great teachers.|5|4
+Mandy|Kaling|Lotus Yoga|Great teachers.|5|4
+Angela|Jolie|Lotus Yoga|Great teachers.|5|4
+Steven|Wonder|Lotus Yoga|Great teachers.|5|4
+Holly|Berry|Lotus Yoga|Great teachers.|5|4
+Merryl|Streepman|Lotus Yoga|Great teachers.|5|4
+Denzel|George|Lotus Yoga|Great teachers.|5|4
+Bradford|Pitt|The Beagel Nightclub|Decent ambiance.|3|3
+Mandy|Kaling|The Beagel Nightclub|Decent ambiance.|3|3
+Angela|Jolie|The Beagel Nightclub|Decent ambiance.|3|3
+Steven|Wonder|The Beagel Nightclub|Decent ambiance.|3|3
+Holly|Berry|The Beagel Nightclub|Decent ambiance.|3|3
+Merryl|Streepman|The Beagel Nightclub|Decent ambiance.|3|3
+Denzel|George|The Beagel Nightclub|Decent ambiance.|3|3
+sqlite> .mode column
+sqlite> .headers on
+sqlite> SELECT users.first_name, users.last_name, businesses.name, reviews.comment, reviews.stars, businesses.id FROM users, businesses, reviews WHERE reviews.businesses_id=businesses.id;
+first_name  last_name   name         comment      stars       id        
+----------  ----------  -----------  -----------  ----------  ----------
+Bradford    Pitt        Sushi World  Great food.  4           6         
+Mandy       Kaling      Sushi World  Great food.  4           6         
+Angela      Jolie       Sushi World  Great food.  4           6         
+Steven      Wonder      Sushi World  Great food.  4           6         
+Holly       Berry       Sushi World  Great food.  4           6         
+Merryl      Streepman   Sushi World  Great food.  4           6         
+Denzel      George      Sushi World  Great food.  4           6         
+Bradford    Pitt        Lotus Yoga   Great teach  5           4         
+Mandy       Kaling      Lotus Yoga   Great teach  5           4         
+Angela      Jolie       Lotus Yoga   Great teach  5           4         
+Steven      Wonder      Lotus Yoga   Great teach  5           4         
+Holly       Berry       Lotus Yoga   Great teach  5           4         
+Merryl      Streepman   Lotus Yoga   Great teach  5           4         
+Denzel      George      Lotus Yoga   Great teach  5           4         
+Bradford    Pitt        The Beagel   Decent ambi  3           3         
+Mandy       Kaling      The Beagel   Decent ambi  3           3         
+Angela      Jolie       The Beagel   Decent ambi  3           3         
+Steven      Wonder      The Beagel   Decent ambi  3           3         
+Holly       Berry       The Beagel   Decent ambi  3           3         
+Merryl      Streepman   The Beagel   Decent ambi  3           3         
+Denzel      George      The Beagel   Decent ambi  3           3         
+sqlite> SELECT users.first_name, users.last_name, businesses.name, reviews.comment, reviews.stars, businesses.id FROM users, businesses, reviews WHERE businesses.id=reviews.businesses_id;
+first_name  last_name   name         comment      stars       id        
+----------  ----------  -----------  -----------  ----------  ----------
+Bradford    Pitt        Sushi World  Great food.  4           6         
+Mandy       Kaling      Sushi World  Great food.  4           6         
+Angela      Jolie       Sushi World  Great food.  4           6         
+Steven      Wonder      Sushi World  Great food.  4           6         
+Holly       Berry       Sushi World  Great food.  4           6         
+Merryl      Streepman   Sushi World  Great food.  4           6         
+Denzel      George      Sushi World  Great food.  4           6         
+Bradford    Pitt        Lotus Yoga   Great teach  5           4         
+Mandy       Kaling      Lotus Yoga   Great teach  5           4         
+Angela      Jolie       Lotus Yoga   Great teach  5           4         
+Steven      Wonder      Lotus Yoga   Great teach  5           4         
+Holly       Berry       Lotus Yoga   Great teach  5           4         
+Merryl      Streepman   Lotus Yoga   Great teach  5           4         
+Denzel      George      Lotus Yoga   Great teach  5           4         
+Bradford    Pitt        The Beagel   Decent ambi  3           3         
+Mandy       Kaling      The Beagel   Decent ambi  3           3         
+Angela      Jolie       The Beagel   Decent ambi  3           3         
+Steven      Wonder      The Beagel   Decent ambi  3           3         
+Holly       Berry       The Beagel   Decent ambi  3           3         
+Merryl      Streepman   The Beagel   Decent ambi  3           3         
+Denzel      George      The Beagel   Decent ambi  3           3         
+sqlite> SELECT users.first_name, users.last_name, businesses.name, reviews.comment, reviews.stars, businesses.id FROM users, businesses, reviews WHERE businesses.id=reviews.businesses_id, AND reviews.businesses_id=users.id;
+Error: near ",": syntax error
+sqlite> SELECT users.first_name, users.last_name, businesses.name, reviews.comment, reviews.stars, businesses.id FROM users, businesses, reviews WHERE businesses.id=reviews.businesses_id AND reviews.businesses_id=users.id;
+first_name  last_name   name         comment      stars       id        
+----------  ----------  -----------  -----------  ----------  ----------
+Merryl      Streepman   Sushi World  Great food.  4           6         
+Steven      Wonder      Lotus Yoga   Great teach  5           4         
+Angela      Jolie       The Beagel   Decent ambi  3           3         
+sqlite> SELECT users.first_name, users.last_name, businesses.name, reviews.comment, reviews.stars, FROM users, businesses, reviews WHERE businesses.id=reviews.businesses_id AND reviews.businesses_id=users.id;
+Error: near "FROM": syntax error
+sqlite> SELECT users.first_name, users.last_name, businesses.name, reviews.comment, reviews.stars FROM users, businesses, reviews WHERE businesses.id=reviews.businesses_id AND reviews.businesses_id=users.id;
+first_name  last_name   name         comment      stars     
+----------  ----------  -----------  -----------  ----------
+Merryl      Streepman   Sushi World  Great food.  4         
+Steven      Wonder      Lotus Yoga   Great teach  5         
+Angela      Jolie       The Beagel   Decent ambi  3         
+sqlite> .exit 
+welp [master] :> git add .
+welp [master] :> git commit -m "Linked all three tables"
+[master de3df7f] Linked all three tables
+ 1 file changed, 1 insertion(+)
+ create mode 100644 databases/welp/queries.txt
+welp [master] :> sqlite3 welp.db 
+SQLite version 3.8.10.2 2015-05-20 18:17:19
+Enter ".help" for usage hints.
+sqlite> SELECT * FROM reviews WHERE reviews.name="Sushi World";
+Error: no such column: reviews.name
+sqlite> SELECT * FROM reviews WHERE businesses.name="Sushi World";
+Error: no such column: businesses.name
+sqlite> SELECT * FROM reviews WHERE review.businesses_id="Sushi World";
+Error: no such column: review.businesses_id
+sqlite> SELECT * FROM reviews WHERE businesses_id="Sushi World";
+sqlite> SELECT * FROM reviews WHERE businesses_id=3;
+3|3|Decent ambiance.|3|4
+sqlite> SELECT * FROM reviews, users, businesses WHERE businesses_id=3;
+3|3|Decent ambiance.|3|4|1|Bradford|Pitt|1|Grundy Hollow Wedding Chapel
+3|3|Decent ambiance.|3|4|1|Bradford|Pitt|2|Amir's Towing
+3|3|Decent ambiance.|3|4|1|Bradford|Pitt|3|The Beagel Nightclub
+3|3|Decent ambiance.|3|4|1|Bradford|Pitt|4|Lotus Yoga
+3|3|Decent ambiance.|3|4|1|Bradford|Pitt|5|Plumbing by Janet
+3|3|Decent ambiance.|3|4|1|Bradford|Pitt|6|Sushi World
+3|3|Decent ambiance.|3|4|1|Bradford|Pitt|7|JoeBob's Sportz Barn
+3|3|Decent ambiance.|3|4|2|Mandy|Kaling|1|Grundy Hollow Wedding Chapel
+3|3|Decent ambiance.|3|4|2|Mandy|Kaling|2|Amir's Towing
+3|3|Decent ambiance.|3|4|2|Mandy|Kaling|3|The Beagel Nightclub
+3|3|Decent ambiance.|3|4|2|Mandy|Kaling|4|Lotus Yoga
+3|3|Decent ambiance.|3|4|2|Mandy|Kaling|5|Plumbing by Janet
+3|3|Decent ambiance.|3|4|2|Mandy|Kaling|6|Sushi World
+3|3|Decent ambiance.|3|4|2|Mandy|Kaling|7|JoeBob's Sportz Barn
+3|3|Decent ambiance.|3|4|3|Angela|Jolie|1|Grundy Hollow Wedding Chapel
+3|3|Decent ambiance.|3|4|3|Angela|Jolie|2|Amir's Towing
+3|3|Decent ambiance.|3|4|3|Angela|Jolie|3|The Beagel Nightclub
+3|3|Decent ambiance.|3|4|3|Angela|Jolie|4|Lotus Yoga
+3|3|Decent ambiance.|3|4|3|Angela|Jolie|5|Plumbing by Janet
+3|3|Decent ambiance.|3|4|3|Angela|Jolie|6|Sushi World
+3|3|Decent ambiance.|3|4|3|Angela|Jolie|7|JoeBob's Sportz Barn
+3|3|Decent ambiance.|3|4|4|Steven|Wonder|1|Grundy Hollow Wedding Chapel
+3|3|Decent ambiance.|3|4|4|Steven|Wonder|2|Amir's Towing
+3|3|Decent ambiance.|3|4|4|Steven|Wonder|3|The Beagel Nightclub
+3|3|Decent ambiance.|3|4|4|Steven|Wonder|4|Lotus Yoga
+3|3|Decent ambiance.|3|4|4|Steven|Wonder|5|Plumbing by Janet
+3|3|Decent ambiance.|3|4|4|Steven|Wonder|6|Sushi World
+3|3|Decent ambiance.|3|4|4|Steven|Wonder|7|JoeBob's Sportz Barn
+3|3|Decent ambiance.|3|4|5|Holly|Berry|1|Grundy Hollow Wedding Chapel
+3|3|Decent ambiance.|3|4|5|Holly|Berry|2|Amir's Towing
+3|3|Decent ambiance.|3|4|5|Holly|Berry|3|The Beagel Nightclub
+3|3|Decent ambiance.|3|4|5|Holly|Berry|4|Lotus Yoga
+3|3|Decent ambiance.|3|4|5|Holly|Berry|5|Plumbing by Janet
+3|3|Decent ambiance.|3|4|5|Holly|Berry|6|Sushi World
+3|3|Decent ambiance.|3|4|5|Holly|Berry|7|JoeBob's Sportz Barn
+3|3|Decent ambiance.|3|4|6|Merryl|Streepman|1|Grundy Hollow Wedding Chapel
+3|3|Decent ambiance.|3|4|6|Merryl|Streepman|2|Amir's Towing
+3|3|Decent ambiance.|3|4|6|Merryl|Streepman|3|The Beagel Nightclub
+3|3|Decent ambiance.|3|4|6|Merryl|Streepman|4|Lotus Yoga
+3|3|Decent ambiance.|3|4|6|Merryl|Streepman|5|Plumbing by Janet
+3|3|Decent ambiance.|3|4|6|Merryl|Streepman|6|Sushi World
+3|3|Decent ambiance.|3|4|6|Merryl|Streepman|7|JoeBob's Sportz Barn
+3|3|Decent ambiance.|3|4|7|Denzel|George|1|Grundy Hollow Wedding Chapel
+3|3|Decent ambiance.|3|4|7|Denzel|George|2|Amir's Towing
+3|3|Decent ambiance.|3|4|7|Denzel|George|3|The Beagel Nightclub
+3|3|Decent ambiance.|3|4|7|Denzel|George|4|Lotus Yoga
+3|3|Decent ambiance.|3|4|7|Denzel|George|5|Plumbing by Janet
+3|3|Decent ambiance.|3|4|7|Denzel|George|6|Sushi World
+3|3|Decent ambiance.|3|4|7|Denzel|George|7|JoeBob's Sportz Barn
+sqlite> SELECT * FROM reviews, users, businesses WHERE businesses_id=3, businesses.name="Sushi World";
+Error: near ",": syntax error
+sqlite> SELECT * FROM reviews, users, businesses WHERE businesses_id=3 businesses.name="Sushi World";
+Error: near "businesses": syntax error
+sqlite> SELECT * FROM reviews, users, businesses WHERE businesses.name="Sushi World";
+1|4|Great food.|6|4|1|Bradford|Pitt|6|Sushi World
+1|4|Great food.|6|4|2|Mandy|Kaling|6|Sushi World
+1|4|Great food.|6|4|3|Angela|Jolie|6|Sushi World
+1|4|Great food.|6|4|4|Steven|Wonder|6|Sushi World
+1|4|Great food.|6|4|5|Holly|Berry|6|Sushi World
+1|4|Great food.|6|4|6|Merryl|Streepman|6|Sushi World
+1|4|Great food.|6|4|7|Denzel|George|6|Sushi World
+2|5|Great teachers.|4|3|1|Bradford|Pitt|6|Sushi World
+2|5|Great teachers.|4|3|2|Mandy|Kaling|6|Sushi World
+2|5|Great teachers.|4|3|3|Angela|Jolie|6|Sushi World
+2|5|Great teachers.|4|3|4|Steven|Wonder|6|Sushi World
+2|5|Great teachers.|4|3|5|Holly|Berry|6|Sushi World
+2|5|Great teachers.|4|3|6|Merryl|Streepman|6|Sushi World
+2|5|Great teachers.|4|3|7|Denzel|George|6|Sushi World
+3|3|Decent ambiance.|3|4|1|Bradford|Pitt|6|Sushi World
+3|3|Decent ambiance.|3|4|2|Mandy|Kaling|6|Sushi World
+3|3|Decent ambiance.|3|4|3|Angela|Jolie|6|Sushi World
+3|3|Decent ambiance.|3|4|4|Steven|Wonder|6|Sushi World
+3|3|Decent ambiance.|3|4|5|Holly|Berry|6|Sushi World
+3|3|Decent ambiance.|3|4|6|Merryl|Streepman|6|Sushi World
+3|3|Decent ambiance.|3|4|7|Denzel|George|6|Sushi World
+sqlite> SELECT users.first_name, businesses.name, reviews.stars FROM users, businesses, reviews JOIN businesses ON reviews.businesses_id=businesses.id;
+Error: ambiguous column name: businesses.name
+sqlite> SELECT users.first_name, businesses.name, reviews.stars FROM users, businesses, reviews WHERE businesses.name="Sushi World";
+Bradford|Sushi World|4
+Bradford|Sushi World|5
+Bradford|Sushi World|3
+Mandy|Sushi World|4
+Mandy|Sushi World|5
+Mandy|Sushi World|3
+Angela|Sushi World|4
+Angela|Sushi World|5
+Angela|Sushi World|3
+Steven|Sushi World|4
+Steven|Sushi World|5
+Steven|Sushi World|3
+Holly|Sushi World|4
+Holly|Sushi World|5
+Holly|Sushi World|3
+Merryl|Sushi World|4
+Merryl|Sushi World|5
+Merryl|Sushi World|3
+Denzel|Sushi World|4
+Denzel|Sushi World|5
+Denzel|Sushi World|3
+sqlite> SELECT users.first_name, businesses.name, reviews.stars FROM reviews WHERE businesses.name="Sushi World"; 
+Error: no such column: users.first_name
+sqlite> SELECT users.first_name, reviews.stars FROM users, businesses, reviews WHERE businesses.name="Sushi World"; 
+Bradford|4
+Bradford|5
+Bradford|3
+Mandy|4
+Mandy|5
+Mandy|3
+Angela|4
+Angela|5
+Angela|3
+Steven|4
+Steven|5
+Steven|3
+Holly|4
+Holly|5
+Holly|3
+Merryl|4
+Merryl|5
+Merryl|3
+Denzel|4
+Denzel|5
+Denzel|3
+sqlite> SELECT users.first_name, businesses.name, reviews.stars FROM users, businesses, reviews WHERE businesses.name="Sushi World" AND businesses.id=reviews.businesses_id;
+Bradford|Sushi World|4
+Mandy|Sushi World|4
+Angela|Sushi World|4
+Steven|Sushi World|4
+Holly|Sushi World|4
+Merryl|Sushi World|4
+Denzel|Sushi World|4
+sqlite> SELECT users.first_name, businesses.name, reviews.stars FROM users, businesses, reviews WHERE businesses.name="Sushi World" AND businesses.id=reviews.businesses_id AND reviews.businesses_id=users.id;
+Merryl|Sushi World|4
+sqlite> SELECT users.first_name, businesses.name, reviews.stars, reviews.comment FROM users, businesses, reviews WHERE businesse
+Merryl|Sushi World|4|Great food.
+sqlite> INSERT INTO reviews (stars, comment, businesses_id, users_id) VALUES (3, "Food was OK", 6, 5);
+sqlite> SELECT users.first_name, businesses.name, reviews.stars, reviews.comment FROM users, businesses, reviews WHERE businesses.name="Sushi World" AND businesses.id=reviews.businesses_id AND reviews.businesses_id=users.id;
+Merryl|Sushi World|4|Great food.
+Merryl|Sushi World|3|Food was OK
+sqlite> INSERT INTO reviews (stars, comment, businesses_id, users_id) VALUES (3, "Food was OK", 6, 1);
+sqlite> SELECT users.first_name, businesses.name, reviews.stars, reviews.comment FROM users, businesses, reviews WHERE businesses.name="Sushi World" AND businesses.id=reviews.businesses_id AND reviews.businesses_id=users.id;
+Merryl|Sushi World|4|Great food.
+Merryl|Sushi World|3|Food was OK
+Merryl|Sushi World|3|Food was OK
+sqlite> SELECT users.first_name, businesses.name, reviews.stars, reviews.comment FROM users, businesses, reviews WHERE businesses.name="Sushi World" AND businesses.id=reviews.businesses_id AND businesses_id=users.id;
+Merryl|Sushi World|4|Great food.
+Merryl|Sushi World|3|Food was OK
+Merryl|Sushi World|3|Food was OK
+sqlite> SELECT users.first_name, businesses.name, reviews.stars, reviews.comment FROM users, businesses, reviews WHERE businesses.name="Sushi World" AND businesses.id=reviews.businesses_id;
+Bradford|Sushi World|3|Food was OK
+Bradford|Sushi World|3|Food was OK
+Bradford|Sushi World|4|Great food.
+Mandy|Sushi World|3|Food was OK
+Mandy|Sushi World|3|Food was OK
+Mandy|Sushi World|4|Great food.
+Angela|Sushi World|3|Food was OK
+Angela|Sushi World|3|Food was OK
+Angela|Sushi World|4|Great food.
+Steven|Sushi World|3|Food was OK
+Steven|Sushi World|3|Food was OK
+Steven|Sushi World|4|Great food.
+Holly|Sushi World|3|Food was OK
+Holly|Sushi World|3|Food was OK
+Holly|Sushi World|4|Great food.
+Merryl|Sushi World|3|Food was OK
+Merryl|Sushi World|3|Food was OK
+Merryl|Sushi World|4|Great food.
+Denzel|Sushi World|3|Food was OK
+Denzel|Sushi World|3|Food was OK
+Denzel|Sushi World|4|Great food.
+sqlite> SELECT users.first_name, businesses.name, reviews.stars, reviews.comment FROM users, businesses, reviews WHERE businesses.name="Sushi World" AND businesses.id=reviews.businesses_id AND reviews.users_id=users.id;
+Steven|Sushi World|4|Great food.
+Holly|Sushi World|3|Food was OK
+Bradford|Sushi World|3|Food was OK
+sqlite> .exit
+welp [master] :> git add .
+welp [master] :> git commit -m "Completed release 2"
+[master 83bbd91] Completed release 2
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+welp [master] :> 
