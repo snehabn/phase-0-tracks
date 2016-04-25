@@ -25,7 +25,7 @@ create_table_cmd = <<-SQL
     year_pubished DATE,
     genre VARCHAR(255),
     author VARCHAR(255),
-    read VARCHAR(255),
+    read INT,
     rating REAL
   )
 SQL
@@ -65,10 +65,21 @@ def update_rating_entry(db, rating, id)
 	db.execute("UPDATE books SET rating=? WHERE id=?", [rating, id])
 end
 
-# # method that updates the user's reading status on book.
-# def update_read_entry(db, read, id)
-# 	db.execute("UPDATE books SET read=? WHERE id=?", [read, id])
-# end
+# method that updates the reader's progress
+def update_pages_entry(db, read, id)
+	db.execute("UPDATE books SET read=? WHERE id=?", [read, id])
+end
+
+# method that deletes an entry
+def delete_book(db, book_name)
+	db.execute("DELETE FROM books WHERE book_name =?", [book_name])
+end
+
+# method that creates an overview of the table
+def overview(db)
+	overview = db.execute("CREATE VIEW [Your top books!] AS SELECT book_name, author FROM books where rating > 3")
+	return overview
+end
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -81,10 +92,23 @@ def display_entries(db)
 	else
 		entries.each do |book|
 	 		puts "#{book['id']}. #{book['book_name']} by #{book['author']}"
-	 		puts "	Published: #{book['year_pubished']}, Reading status: #{book['read']}"
+	 		puts "	Published: #{book['year_pubished']}, Reading status: #{book['read']} pages read."
 	 		puts " 	Genre: #{book['genre']}"
 	 		puts "	Your rating: #{book['rating']} out 10."
 	 		puts
+		end
+	end
+end
+
+# method that will display summarized contents
+def summ_contents(db)
+	summ_entries = db.execute("SELECT * FROM books")
+	if summ_entries == []
+		puts "You have zero logged books!"
+		puts
+	else
+		summ_entries.each do |book|
+	 		puts "#{book['book_name']}"
 		end
 	end
 end
@@ -116,8 +140,9 @@ puts
 		puts "Please select from the following options:"
 		puts "1 - Enter a book into your log."
 		puts "2 - Update a current entry."
-		puts "3 - View your current log of books."
-		puts "4 - Exit the program."
+		puts "3 - Delete an entry."
+		puts "4 - View your current log of books."
+		puts "5 - Exit the program."
 		user_num_entry = gets.chomp.to_i
 		puts
 
@@ -152,8 +177,8 @@ puts
 					rating = gets.chomp.to_i
 					puts
 
-					puts "6. How far along are you in the book?"
-					read = gets.chomp.capitalize
+					puts "6. How many pages of the book have you completed?"
+					read = gets.chomp.to_i
 					puts
 
 					add_entry(db, book_name, year_pubished, genre, author, rating, read)
@@ -178,6 +203,7 @@ puts
 			puts "3 - Genre"
 			puts "4 - Author Name"
 			puts "5 - Your Rating"
+			puts "6 - Pages Read"
 			update_num = gets.chomp.to_i
 
 			case update_num
@@ -193,18 +219,21 @@ puts
 			when 2
 				puts "Please enter new published year:"
 				year_pubished = gets.chomp.to_i
+				id = book_id
 				update_year_published_entry(db, year_pubished, id)
 				puts "The revised published year is #{year_pubished}."
 
 			when 3
 				puts "Please enter new genre for the book:"
 				genre = gets.chomp.capitalize
+				id = book_id
 				update_genre_entry(db, genre, id)
 				puts "The revised genre is #{genre}."
 
 			when 4
 				puts "Please enter revised author's name:"
 				author = gets.chomp
+				id = book_id
 				author = author.split.map(&:capitalize).join(' ')
 				update_author_entry(db, author, id)
 				puts "The revised author name is #{author}."
@@ -212,8 +241,16 @@ puts
 			when 5
 				puts "On a scale of 1 to 5, what would you like to change your rating to?"
 				rating = gets.chomp.to_f
+				id = book_id
 				update_rating_entry(db, rating, id)
 				puts "Your revised rating is #{rating}."
+
+			when 6
+				puts "What page are you currently on in the book?"
+				read = gets.chomp.to_i
+				id = book_id
+				update_pages_entry(db, read, id)
+				puts "Your revised current page is #{read}"
 
 			else
 				puts "You've selection is invalid."
@@ -221,10 +258,22 @@ puts
 			end
 
 		when 3
+			summ_contents(db)
+			puts
+			puts "What book would you like to delete?"
+			book_name = gets.chomp
+			book_name = book_name.split.map(&:capitalize).join(' ')
+			delete_book(db, book_name)
+			puts
+			puts "Here are your remaining books:"
+			summ_contents(db)
+			puts
+
+		when 4
 			display_entries(db)
 			
 
-		when 4
+		when 5
 			puts
 			puts "Thank you for logging your books!"
 			puts "Happy reading!!"
