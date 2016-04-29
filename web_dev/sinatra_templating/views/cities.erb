@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cities</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<p>Here are the Student IDs and Respective Campuses</p>
+<p><a href="/update_cities">Update</a> a student's location.</p>
+  <ul>
+    <% @students.each do |student| %>
+      <li><%= student['id'] %> ---- <%= student['campus'] %></li>
+    <% end %>
+  </ul>
+</body>
+</html>
