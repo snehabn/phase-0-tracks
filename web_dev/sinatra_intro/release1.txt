@@ -1,0 +1,15 @@
+1. Is Sinatra the only web app library in Ruby? What are some others?
+	Ruby on Rails is another more popular web app library in Ruby.
+	source: http://www.sitepoint.com/rails-or-sinatra-the-best-of-both-worlds/
+
+	Also found Padrino, that's built off of the Sinatra framework.
+	source: http://padrinorb.com/
+
+2. Are SQLite and the sqlite3 gem your only options for using a database with Sinatra? What are some others?
+	DB2, Firebird, FrontBase, MySQL, OpenBase, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase
+	source: http://www.devarticles.com/c/a/Ruby-on-Rails/Databases-and-Ruby-on-Rails/
+
+3. What is meant by the term web stack?
+	Web stack is the collection of software required for web development. Contains: OS, programming language, database software, and web server.
+	source: http://whatis.techtarget.com/definition/Web-stack
+	
